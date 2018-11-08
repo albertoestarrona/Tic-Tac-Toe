@@ -14,6 +14,8 @@
 		D29F95122191EE6B00F9BFA1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D29F95102191EE6B00F9BFA1 /* LaunchScreen.storyboard */; };
 		D29F95152191EE6B00F9BFA1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D29F95142191EE6B00F9BFA1 /* main.m */; };
 		D29F951F2191EE6B00F9BFA1 /* Tic_Tac_ToeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D29F951E2191EE6B00F9BFA1 /* Tic_Tac_ToeTests.m */; };
+		D2D969E62194A2F90003CFE4 /* line45.png in Resources */ = {isa = PBXBuildFile; fileRef = D2D969E52194A2F90003CFE4 /* line45.png */; };
+		D2D969E82194A49F0003CFE4 /* line45r.png in Resources */ = {isa = PBXBuildFile; fileRef = D2D969E72194A49F0003CFE4 /* line45r.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,8 @@
 		D29F951A2191EE6B00F9BFA1 /* Tic Tac ToeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tic Tac ToeTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29F951E2191EE6B00F9BFA1 /* Tic_Tac_ToeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tic_Tac_ToeTests.m; sourceTree = "<group>"; };
 		D29F95202191EE6B00F9BFA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D2D969E52194A2F90003CFE4 /* line45.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line45.png; sourceTree = SOURCE_ROOT; };
+		D2D969E72194A49F0003CFE4 /* line45r.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line45r.png; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +85,7 @@
 		D29F95042191EE6A00F9BFA1 /* Tic Tac Toe */ = {
 			isa = PBXGroup;
 			children = (
+				D2D969E42194A2E70003CFE4 /* Resources */,
 				D29F95052191EE6A00F9BFA1 /* AppDelegate.h */,
 				D29F95062191EE6A00F9BFA1 /* AppDelegate.m */,
 				D29F95082191EE6A00F9BFA1 /* ViewController.h */,
@@ -101,6 +106,15 @@
 				D29F95202191EE6B00F9BFA1 /* Info.plist */,
 			);
 			path = "Tic Tac ToeTests";
+			sourceTree = "<group>";
+		};
+		D2D969E42194A2E70003CFE4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D2D969E52194A2F90003CFE4 /* line45.png */,
+				D2D969E72194A49F0003CFE4 /* line45r.png */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -183,8 +197,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2D969E82194A49F0003CFE4 /* line45r.png in Resources */,
 				D29F95122191EE6B00F9BFA1 /* LaunchScreen.storyboard in Resources */,
 				D29F950F2191EE6B00F9BFA1 /* Assets.xcassets in Resources */,
+				D2D969E62194A2F90003CFE4 /* line45.png in Resources */,
 				D29F950D2191EE6A00F9BFA1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
