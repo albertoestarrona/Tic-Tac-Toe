@@ -25,6 +25,7 @@
                                     <constraint firstAttribute="width" constant="50" id="sih-WZ-vug"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <state key="normal" title="-"/>
                                 <connections>
                                     <action selector="didSelectPosition:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kIe-Ve-XVt"/>
                                 </connections>
@@ -36,6 +37,7 @@
                                     <constraint firstAttribute="width" constant="50.5" id="ZbZ-SN-Lgz"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <state key="normal" title="-"/>
                                 <connections>
                                     <action selector="didSelectPosition:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bhS-5P-mIn"/>
                                 </connections>
@@ -47,6 +49,7 @@
                                     <constraint firstAttribute="width" constant="50" id="fLN-rG-fVP"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <state key="normal" title="-"/>
                                 <connections>
                                     <action selector="didSelectPosition:" destination="BYZ-38-t0r" eventType="touchUpInside" id="adb-Xo-ztI"/>
                                 </connections>
@@ -58,6 +61,7 @@
                                     <constraint firstAttribute="height" constant="50" id="wTJ-eg-Niw"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <state key="normal" title="-"/>
                                 <connections>
                                     <action selector="didSelectPosition:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ax2-bX-Gf3"/>
                                 </connections>
@@ -69,6 +73,7 @@
                                     <constraint firstAttribute="width" constant="50" id="hAW-Xn-XhC"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <state key="normal" title="-"/>
                                 <connections>
                                     <action selector="didSelectPosition:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dJE-9J-78P"/>
                                 </connections>
@@ -80,6 +85,7 @@
                                     <constraint firstAttribute="width" constant="50" id="i2Q-OX-rRU"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <state key="normal" title="-"/>
                                 <connections>
                                     <action selector="didSelectPosition:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ccu-dq-XLJ"/>
                                 </connections>
@@ -91,6 +97,7 @@
                                     <constraint firstAttribute="width" constant="50" id="nJM-aj-bSg"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <state key="normal" title="-"/>
                                 <connections>
                                     <action selector="didSelectPosition:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7Pm-W6-NKj"/>
                                 </connections>
@@ -102,6 +109,7 @@
                                     <constraint firstAttribute="height" constant="50" id="HbC-8E-8JC"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <state key="normal" title="-"/>
                                 <connections>
                                     <action selector="didSelectPosition:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vZv-2h-FDR"/>
                                 </connections>
@@ -113,6 +121,7 @@
                                     <constraint firstAttribute="height" constant="50" id="bAu-Rm-kVT"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <state key="normal" title="-"/>
                                 <connections>
                                     <action selector="didSelectPosition:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DYm-F0-gWh"/>
                                 </connections>
@@ -204,24 +213,24 @@
                                     <constraint firstAttribute="width" constant="3" id="Hxe-9y-FAV"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Click to start the game" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Qt-eh-tQ6">
-                                <rect key="frame" x="42.5" y="148" width="290" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Qt-eh-tQ6">
+                                <rect key="frame" x="42.5" y="140" width="290" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="290" id="TCi-n5-4hY"/>
-                                    <constraint firstAttribute="height" constant="21" id="j4d-h1-gAk"/>
+                                    <constraint firstAttribute="height" constant="60" id="j4d-h1-gAk"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="71g-H3-xUw">
-                                <rect key="frame" x="153" y="71" width="69" height="30"/>
+                                <rect key="frame" x="71" y="71" width="233" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Umc-2w-EE3"/>
-                                    <constraint firstAttribute="width" constant="69" id="yS8-AO-7dO"/>
+                                    <constraint firstAttribute="width" constant="233" id="yS8-AO-7dO"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
-                                <state key="normal" title="Start!"/>
+                                <state key="normal" title="Click to start!"/>
                                 <connections>
                                     <action selector="initGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="U4R-Ao-ERN"/>
                                 </connections>
@@ -261,7 +270,7 @@
                             <constraint firstItem="K3w-Va-uka" firstAttribute="leading" secondItem="eHo-Jk-EEi" secondAttribute="trailing" constant="20" id="laG-7g-gtd"/>
                             <constraint firstItem="yeF-1H-kzh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="m4s-Ni-TiF"/>
                             <constraint firstItem="lW7-7a-FBq" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="mu0-pQ-eqo"/>
-                            <constraint firstItem="8Qt-eh-tQ6" firstAttribute="top" secondItem="71g-H3-xUw" secondAttribute="bottom" constant="47" id="nVX-q4-51s"/>
+                            <constraint firstItem="8Qt-eh-tQ6" firstAttribute="top" secondItem="71g-H3-xUw" secondAttribute="bottom" constant="39" id="nVX-q4-51s"/>
                             <constraint firstItem="o07-ze-oL7" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="nZ8-Zt-xAt"/>
                             <constraint firstItem="eHo-Jk-EEi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="oTM-te-cvk"/>
                             <constraint firstItem="K3w-Va-uka" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="pZR-7N-Hax"/>
@@ -286,6 +295,7 @@
                         <outlet property="buttonPos7" destination="jPo-n0-cWB" id="BKj-IW-dF2"/>
                         <outlet property="buttonPos8" destination="QYN-Mf-nEA" id="H87-5y-7F4"/>
                         <outlet property="buttonPos9" destination="I7a-55-0o8" id="g47-XJ-KCe"/>
+                        <outlet property="buttonStart" destination="71g-H3-xUw" id="II7-oh-6Mq"/>
                         <outlet property="msgLabel" destination="8Qt-eh-tQ6" id="5e3-mQ-e8A"/>
                         <outlet property="winningLine1" destination="o3Z-ab-dZW" id="DRU-wx-EmV"/>
                         <outlet property="winningLine2" destination="lW7-7a-FBq" id="CC1-UE-TyT"/>

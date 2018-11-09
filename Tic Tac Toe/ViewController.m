@@ -9,15 +9,19 @@
 #import "ViewController.h"
 
 @interface ViewController () {
-    @protected  int turn;
+    @private  int turn;
     @private    int positions[9];
     @private    int valuePosition;
+    @private    int win;
 }
 
 @end
+int const NO_WINNER = 0;
+int const WINNER_X = 1;
+int const WINNER_O = 2;
 
 @implementation ViewController
-@synthesize buttonPos1, buttonPos2, buttonPos3, buttonPos4, buttonPos5, buttonPos6, buttonPos7, buttonPos8, buttonPos9, winningLine1, winningLine2, winningLine3, winningLine4, winningLine5, winningLine6, winningLine78, msgLabel;
+@synthesize buttonPos1, buttonPos2, buttonPos3, buttonPos4, buttonPos5, buttonPos6, buttonPos7, buttonPos8, buttonPos9, winningLine1, winningLine2, winningLine3, winningLine4, winningLine5, winningLine6, winningLine78, msgLabel, buttonStart;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -26,6 +30,7 @@
 - (IBAction)initGame:(id)sender {
     // Set all initial conditions
     turn = 0;
+    win = NO_WINNER;
     for (int index = 0; index < 9; index++) {
         positions[index] = 0;
     }
@@ -53,7 +58,8 @@
     winningLine3.hidden = true; winningLine4.hidden = true;
     winningLine5.hidden = true; winningLine6.hidden = true;
     winningLine78.hidden = true;
-    msgLabel.text = @"Please go first, try your best shot human";
+    msgLabel.text = @"Please go first and try your best shot my friend.";
+    [buttonStart setTitle:@"Restart game" forState:UIControlStateNormal ];
 }
 
 -(IBAction)didSelectPosition:(id)sender {
@@ -94,6 +100,10 @@
             [self makeMoveToPosition:nextPosition];
             [self chekWinningPositionWith:nextPosition];
         }
+        
+        if (win == NO_WINNER && turn == 9) {
+            [self setFinalMessage];
+        }
     }
 }
 
@@ -110,7 +120,7 @@
     } else if (button == buttonPos3) {
         buttonPos3.enabled = false;
         position = 2;
-        valuePosition = 5;
+        valuePosition = 9;
     } else if (button == buttonPos4) {
         buttonPos4.enabled = false;
         position = 3;
@@ -122,7 +132,7 @@
     } else if (button == buttonPos6) {
         buttonPos6.enabled = false;
         position = 5;
-        valuePosition = 55;
+        valuePosition = 99;
     } else if (button == buttonPos7) {
         buttonPos7.enabled = false;
         position = 6;
@@ -134,7 +144,7 @@
     } else if (button == buttonPos9) {
         buttonPos9.enabled = false;
         position = 8;
-        valuePosition = 555;
+        valuePosition = 999;
     }
     return position;
 }
@@ -228,6 +238,11 @@
 
 
 -(void)makeWinningLineWith:(int) lineNumber {
+    if (turn % 2 == 0) {
+        win = WINNER_O;
+    } else {
+        win = WINNER_X;
+    }
     switch (lineNumber) {
         case 1: {
             winningLine1.hidden = false;
@@ -267,6 +282,20 @@
             break;
     }
     
+    [self setFinalMessage];
+}
+
+-(void)setFinalMessage {
+    if (win) {
+        if (win == WINNER_X) {
+            msgLabel.text = @"Wow! This is impossible... \nYou won.";
+        } else {
+            msgLabel.text = @"Sorry... but I won.";
+        }
+    } else {
+        msgLabel.text = @"Draw! Good game, really enjoyed it my friend.";
+    }
+    [buttonStart setTitle:@"Try again?" forState:UIControlStateNormal ];
 }
 
 -(int)nextBlankCornerFor:(int) position {
@@ -304,14 +333,14 @@
     int killingPosition = -1;
     
     if ((positions[0] + positions[1] + positions[2]) == -4 ) killingPosition = 2;
-    else if ((positions[0] + positions[1] + positions[2]) == -6 ) killingPosition = 1;
-    else if ((positions[0] + positions[1] + positions[2]) == -8 ) killingPosition = 0;
+    else if ((positions[0] + positions[1] + positions[2]) == -10 ) killingPosition = 1;
+    else if ((positions[0] + positions[1] + positions[2]) == -12 ) killingPosition = 0;
     else if ((positions[3] + positions[4] + positions[5]) == -44 ) killingPosition = 5;
-    else if ((positions[3] + positions[4] + positions[5]) == -66 ) killingPosition = 4;
-    else if ((positions[3] + positions[4] + positions[5]) == -88 ) killingPosition = 3;
+    else if ((positions[3] + positions[4] + positions[5]) == -110 ) killingPosition = 4;
+    else if ((positions[3] + positions[4] + positions[5]) == -132 ) killingPosition = 3;
     else if ((positions[6] + positions[7] + positions[8]) == -444 ) killingPosition = 8;
-    else if ((positions[6] + positions[7] + positions[8]) == -666 ) killingPosition = 7;
-    else if ((positions[6] + positions[7] + positions[8]) == -888 ) killingPosition = 6;
+    else if ((positions[6] + positions[7] + positions[8]) == -1110 ) killingPosition = 7;
+    else if ((positions[6] + positions[7] + positions[8]) == -1332 ) killingPosition = 6;
     
     else if ((positions[0] + positions[3] + positions[6]) == -12 ) killingPosition = 6;
     else if ((positions[0] + positions[3] + positions[6]) == -112 ) killingPosition = 3;
@@ -319,9 +348,16 @@
     else if ((positions[1] + positions[4] + positions[7]) == -36 ) killingPosition = 7;
     else if ((positions[1] + positions[4] + positions[7]) == -336 ) killingPosition = 4;
     else if ((positions[1] + positions[4] + positions[7]) == -366 ) killingPosition = 1;
-    else if ((positions[2] + positions[5] + positions[8]) == -60 ) killingPosition = 8;
-    else if ((positions[2] + positions[5] + positions[8]) == -560 ) killingPosition = 5;
-    else if ((positions[2] + positions[5] + positions[8]) == -610 ) killingPosition = 2;
+    else if ((positions[2] + positions[5] + positions[8]) == -108 ) killingPosition = 8;
+    else if ((positions[2] + positions[5] + positions[8]) == -1008 ) killingPosition = 5;
+    else if ((positions[2] + positions[5] + positions[8]) == -1098 ) killingPosition = 2;
+    
+    else if ((positions[0] + positions[4] + positions[8]) == -34 ) killingPosition = 8;
+    else if ((positions[0] + positions[4] + positions[8]) == -1000 ) killingPosition = 4;
+    else if ((positions[0] + positions[4] + positions[8]) == -1032 ) killingPosition = 0;
+    else if ((positions[6] + positions[4] + positions[2]) == -42 ) killingPosition = 6;
+    else if ((positions[6] + positions[4] + positions[2]) == -120 ) killingPosition = 4;
+    else if ((positions[6] + positions[4] + positions[2]) == -144 ) killingPosition = 2;
     
     return killingPosition;
 }
@@ -345,7 +381,7 @@
             break;
         case 8:
             blankCorner = [self nextBlankCornerFor:8];
-            if (blankCorner != -1 && turn != 3) blankSpot = blankCorner;
+            if ((blankCorner != -1 && turn != 3) || (blankCorner != -1 && positions[4] > 0)) blankSpot = blankCorner;
             else if (positions[7] == 0) blankSpot = 7;
             else if (positions[5] == 0) blankSpot = 5;
             break;
@@ -376,22 +412,22 @@
     
     switch (position) {
         case 0: {
-            if (abs(positions[0] + positions[1] + positions[2]) == 9) {
+            if (abs(positions[0] + positions[1] + positions[2]) == 13) {
                 [self makeWinningLineWith:1];
             } else if (abs(positions[0] + positions[3] + positions[6]) == 123) {
                 [self makeWinningLineWith:4];
-            } else if (abs(positions[0] + positions[4] + positions[8]) == 589) {
+            } else if (abs(positions[0] + positions[4] + positions[8]) == 1033) {
                 [self makeWinningLineWith:7];
             } else {
                 killingPosition = [self checkForKillingMove];
                 if (killingPosition != -1) nextPosition = killingPosition;
                 else if ((positions[1] + positions[2]) == 3) {
                     nextPosition = 2;
-                } else if ((positions[1] + positions[2]) == 5) {
+                } else if ((positions[1] + positions[2]) == 9) {
                     nextPosition = 1;
                 } else if ((positions[4] + positions[8]) == 33) {
                     nextPosition = 8;
-                } else if ((positions[4] + positions[8]) == 555) {
+                } else if ((positions[4] + positions[8]) == 999) {
                     nextPosition = 4;
                 } else if ((positions[3] + positions[6]) == 11) {
                     nextPosition = 6;
@@ -403,7 +439,7 @@
             }
         } break;
         case 1: {
-            if (abs(positions[0] + positions[1] + positions[2]) == 9) {
+            if (abs(positions[0] + positions[1] + positions[2]) == 13) {
                 [self makeWinningLineWith:1];
             } else if (abs(positions[1] + positions[4] + positions[7]) == 369) {
                 [self makeWinningLineWith:5];
@@ -412,7 +448,7 @@
                 if (killingPosition != -1) nextPosition = killingPosition;
                 else if ((positions[0] + positions[2]) == 1) {
                     nextPosition = 2;
-                } else if ((positions[0] + positions[2]) == 5) {
+                } else if ((positions[0] + positions[2]) == 9) {
                     nextPosition = 0;
                 } else if ((positions[4] + positions[7]) == 33) {
                     nextPosition = 7;
@@ -424,11 +460,11 @@
             }
         } break;
         case 2: {
-            if (abs(positions[0] + positions[1] + positions[2]) == 9) {
+            if (abs(positions[0] + positions[1] + positions[2]) == 13) {
                 [self makeWinningLineWith:1];
-            } else if (abs(positions[2] + positions[5] + positions[8]) == 615) {
+            } else if (abs(positions[2] + positions[5] + positions[8]) == 1107) {
                 [self makeWinningLineWith:6];
-            } else if (abs(positions[2] + positions[4] + positions[6]) == 149) {
+            } else if (abs(positions[2] + positions[4] + positions[6]) == 153) {
                 [self makeWinningLineWith:8];
             } else {
                 killingPosition = [self checkForKillingMove];
@@ -441,9 +477,9 @@
                     nextPosition = 6;
                 } else if ((positions[4] + positions[6]) == 111) {
                     nextPosition = 4;
-                } else if ((positions[5] + positions[8]) == 55) {
+                } else if ((positions[5] + positions[8]) == 99) {
                     nextPosition = 8;
-                } else if ((positions[5] + positions[8]) == 555) {
+                } else if ((positions[5] + positions[8]) == 999) {
                     nextPosition = 5;
                 } else {
                     nextPosition = [self searchBlankSpotFor:2];
@@ -453,7 +489,7 @@
         case 3: {
             if (abs(positions[0] + positions[3] + positions[6]) == 123) {
                 [self makeWinningLineWith:4];
-            } else if (abs(positions[3] + positions[4] + positions[5]) == 99) {
+            } else if (abs(positions[3] + positions[4] + positions[5]) == 143) {
                 [self makeWinningLineWith:2];
             } else {
                 killingPosition = [self checkForKillingMove];
@@ -470,16 +506,16 @@
             }
         } break;
         case 5: {
-            if (abs(positions[2] + positions[5] + positions[8]) == 615) {
+            if (abs(positions[2] + positions[5] + positions[8]) == 1107) {
                 [self makeWinningLineWith:6];
-            } else if (abs(positions[3] + positions[4] + positions[5]) == 99) {
+            } else if (abs(positions[3] + positions[4] + positions[5]) == 143) {
                 [self makeWinningLineWith:2];
             } else {
                 killingPosition = [self checkForKillingMove];
                 if (killingPosition != -1) nextPosition = killingPosition;
-                else if ((positions[2] + positions[8]) == 5) {
+                else if ((positions[2] + positions[8]) == 9) {
                     nextPosition = 8;
-                } else if ((positions[2] + positions[8]) == 555) {
+                } else if ((positions[2] + positions[8]) == 999) {
                     nextPosition = 2;
                 } else if ((positions[3] + positions[4]) == 33) {
                     nextPosition = 3;
@@ -491,9 +527,9 @@
         case 6: {
             if (abs(positions[0] + positions[3] + positions[6]) == 123) {
                 [self makeWinningLineWith:4];
-            } else if (abs(positions[6] + positions[7] + positions[8]) == 999) {
+            } else if (abs(positions[6] + positions[7] + positions[8]) == 1443) {
                 [self makeWinningLineWith:3];
-            } else if (abs(positions[2] + positions[4] + positions[6]) == 149) {
+            } else if (abs(positions[2] + positions[4] + positions[6]) == 153) {
                 [self makeWinningLineWith:8];
             } else {
                 killingPosition = [self checkForKillingMove];
@@ -504,11 +540,11 @@
                     nextPosition = 0;
                 } else if ((positions[4] + positions[2]) == 33) {
                     nextPosition = 2;
-                } else if ((positions[4] + positions[2]) == 5) {
+                } else if ((positions[4] + positions[2]) == 9) {
                     nextPosition = 4;
                 } else if ((positions[7] + positions[8]) == 333) {
                     nextPosition = 8;
-                } else if ((positions[7] + positions[8]) == 555) {
+                } else if ((positions[7] + positions[8]) == 999) {
                     nextPosition = 7;
                 } else {
                     nextPosition = [self searchBlankSpotFor:6];
@@ -518,14 +554,14 @@
         case 7: {
             if (abs(positions[1] + positions[4] + positions[7]) == 369) {
                 [self makeWinningLineWith:5];
-            } else if (abs(positions[6] + positions[7] + positions[8]) == 999) {
+            } else if (abs(positions[6] + positions[7] + positions[8]) == 1443) {
                 [self makeWinningLineWith:3];
             } else {
                 killingPosition = [self checkForKillingMove];
                 if (killingPosition != -1) nextPosition = killingPosition;
                 else if ((positions[6] + positions[8]) == 111) {
                     nextPosition = 8;
-                } else if ((positions[6] + positions[8]) == 555) {
+                } else if ((positions[6] + positions[8]) == 999) {
                     nextPosition = 6;
                 } else if ((positions[1] + positions[4]) == 33) {
                     nextPosition = 1;
@@ -535,18 +571,18 @@
             }
         } break;
         case 8: {
-            if (abs(positions[2] + positions[5] + positions[8]) == 615) {
+            if (abs(positions[2] + positions[5] + positions[8]) == 1107) {
                 [self makeWinningLineWith:6];
-            } else if (abs(positions[6] + positions[7] + positions[8]) == 999) {
+            } else if (abs(positions[6] + positions[7] + positions[8]) == 1443) {
                 [self makeWinningLineWith:3];
-            } else if (abs(positions[0] + positions[4] + positions[8]) == 589) {
+            } else if (abs(positions[0] + positions[4] + positions[8]) == 1033) {
                 [self makeWinningLineWith:7];
             } else {
                 killingPosition = [self checkForKillingMove];
                 if (killingPosition != -1) nextPosition = killingPosition;
-                else if ((positions[2] + positions[5]) == 5) {
+                else if ((positions[2] + positions[5]) == 9) {
                     nextPosition = 5;
-                } else if ((positions[2] + positions[5]) == 55) {
+                } else if ((positions[2] + positions[5]) == 99) {
                     nextPosition = 2;
                 } else if ((positions[4] + positions[0]) == 33) {
                     nextPosition = 0;

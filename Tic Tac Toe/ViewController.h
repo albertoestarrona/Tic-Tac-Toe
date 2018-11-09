@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface ViewController : UIViewController
+extern int const NO_WINNER;
+extern int const WINNER_X;
+extern int const WINNER_O;
 
 @property (weak, nonatomic) IBOutlet UIButton *buttonPos1;
 @property (weak, nonatomic) IBOutlet UIButton *buttonPos2;
@@ -28,5 +31,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *winningLine6;
 @property (weak, nonatomic) IBOutlet UIImageView *winningLine78;
 @property (weak, nonatomic) IBOutlet UILabel *msgLabel;
+@property (weak, nonatomic) IBOutlet UIButton *buttonStart;
 
 @end
