@@ -204,13 +204,23 @@
                                     <constraint firstAttribute="width" constant="3" id="Hxe-9y-FAV"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Click to start the game" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Qt-eh-tQ6">
+                                <rect key="frame" x="42.5" y="148" width="290" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="290" id="TCi-n5-4hY"/>
+                                    <constraint firstAttribute="height" constant="21" id="j4d-h1-gAk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="71g-H3-xUw">
-                                <rect key="frame" x="156" y="71" width="63" height="30"/>
+                                <rect key="frame" x="153" y="71" width="69" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Umc-2w-EE3"/>
-                                    <constraint firstAttribute="width" constant="63" id="yS8-AO-7dO"/>
+                                    <constraint firstAttribute="width" constant="69" id="yS8-AO-7dO"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                 <state key="normal" title="Start!"/>
                                 <connections>
                                     <action selector="initGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="U4R-Ao-ERN"/>
@@ -241,6 +251,7 @@
                             <constraint firstItem="TJs-6m-ATV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-70" id="ZP7-iQ-Eym"/>
                             <constraint firstItem="I7a-55-0o8" firstAttribute="leading" secondItem="QYN-Mf-nEA" secondAttribute="trailing" constant="20.5" id="bkB-8Y-ctH"/>
                             <constraint firstItem="eHo-Jk-EEi" firstAttribute="leading" secondItem="zhN-A9-yWd" secondAttribute="trailing" constant="20" id="crn-Ta-jqM"/>
+                            <constraint firstItem="8Qt-eh-tQ6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dTw-eB-1dm"/>
                             <constraint firstItem="gBE-ho-deG" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dlq-bJ-rrV"/>
                             <constraint firstItem="1Pn-wC-Y7e" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ghE-KK-Qor"/>
                             <constraint firstItem="sZE-9y-gcD" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="hkM-YI-O3H"/>
@@ -250,6 +261,7 @@
                             <constraint firstItem="K3w-Va-uka" firstAttribute="leading" secondItem="eHo-Jk-EEi" secondAttribute="trailing" constant="20" id="laG-7g-gtd"/>
                             <constraint firstItem="yeF-1H-kzh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="m4s-Ni-TiF"/>
                             <constraint firstItem="lW7-7a-FBq" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="mu0-pQ-eqo"/>
+                            <constraint firstItem="8Qt-eh-tQ6" firstAttribute="top" secondItem="71g-H3-xUw" secondAttribute="bottom" constant="47" id="nVX-q4-51s"/>
                             <constraint firstItem="o07-ze-oL7" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="nZ8-Zt-xAt"/>
                             <constraint firstItem="eHo-Jk-EEi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="oTM-te-cvk"/>
                             <constraint firstItem="K3w-Va-uka" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="pZR-7N-Hax"/>
@@ -274,6 +286,7 @@
                         <outlet property="buttonPos7" destination="jPo-n0-cWB" id="BKj-IW-dF2"/>
                         <outlet property="buttonPos8" destination="QYN-Mf-nEA" id="H87-5y-7F4"/>
                         <outlet property="buttonPos9" destination="I7a-55-0o8" id="g47-XJ-KCe"/>
+                        <outlet property="msgLabel" destination="8Qt-eh-tQ6" id="5e3-mQ-e8A"/>
                         <outlet property="winningLine1" destination="o3Z-ab-dZW" id="DRU-wx-EmV"/>
                         <outlet property="winningLine2" destination="lW7-7a-FBq" id="CC1-UE-TyT"/>
                         <outlet property="winningLine3" destination="1Pn-wC-Y7e" id="gmc-Xb-ybu"/>

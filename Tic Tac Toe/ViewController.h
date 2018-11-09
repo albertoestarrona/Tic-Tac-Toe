@@ -27,5 +27,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *winningLine5;
 @property (weak, nonatomic) IBOutlet UIImageView *winningLine6;
 @property (weak, nonatomic) IBOutlet UIImageView *winningLine78;
+@property (weak, nonatomic) IBOutlet UILabel *msgLabel;
 
 @end
