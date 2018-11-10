@@ -27,6 +27,9 @@ int const WINNER_O = 2;
     [super viewDidLoad];
 }
 
+/*
+ * Method IBAction to initialize a new game: resets UI and state vars
+ */
 - (IBAction)initGame:(id)sender {
     // Set all initial conditions
     turn = 0;
@@ -39,6 +42,9 @@ int const WINNER_O = 2;
     [self resetButtons];
 }
 
+/*
+ * Method to reset all UI components for a new game
+ */
 - (void)resetButtons {
     [buttonPos1 setTitle:@" " forState:UIControlStateNormal ];
     [buttonPos2 setTitle:@" " forState:UIControlStateNormal ];
@@ -62,7 +68,13 @@ int const WINNER_O = 2;
     [buttonStart setTitle:@"Restart game" forState:UIControlStateNormal ];
 }
 
+/*
+ * Method IBAction to Kick off for all game functions by the user interaction
+ * @param sender: Button presed on screen
+ */
 -(IBAction)didSelectPosition:(id)sender {
+    double delayInSeconds = 0.7;
+    
     if (turn != 9) {
         msgLabel.text = @"";
         turn++;
@@ -74,7 +86,10 @@ int const WINNER_O = 2;
             case 1:{
                 positions[positionSelected] = valuePosition;
                 turn++;
-                [self makeInitalMove];
+                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                    [self makeInitalMove];
+                });
                 return;
             } break;
             case 3:{
@@ -97,8 +112,11 @@ int const WINNER_O = 2;
         nextPosition = [self chekWinningPositionWith:positionSelected];
         if (nextPosition >= 0 && turn != 9) {
             turn++;
-            [self makeMoveToPosition:nextPosition];
-            [self chekWinningPositionWith:nextPosition];
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                [self makeMoveToPosition:nextPosition];
+                [self chekWinningPositionWith:nextPosition];
+            });
         }
         
         if (win == NO_WINNER && turn == 9) {
@@ -107,6 +125,11 @@ int const WINNER_O = 2;
     }
 }
 
+/*
+ * Method to identify the position on screen selected by the user. Sets the value on positions[] to identify later the player on that position
+ * @param button: Button presed on screen
+ * @return int: The position selected on screen
+ */
 -(int)getPosition:(id)button {
     int position = 0;
     if (button == buttonPos1) {
@@ -149,6 +172,10 @@ int const WINNER_O = 2;
     return position;
 }
 
+/*
+* Method to mark on screen the sign depending on the player in turn
+* @param position: Position on screen where the sign should be rendered
+*/
 -(void)setUIPosition:(int) position {
     NSString *signChar = [[NSString alloc] init];
     if (turn % 2 == 0) {
@@ -189,6 +216,10 @@ int const WINNER_O = 2;
     }
 }
 
+/*
+ * Method to create on screen the computer's move at its turn
+ * @param position: Position on screen where the movement should be created
+ */
 -(void)makeMoveToPosition:(int) position {
     switch (position) {
         case 0:
@@ -226,6 +257,9 @@ int const WINNER_O = 2;
     positions[position] = -1 * valuePosition;
 }
 
+/*
+ * Method for the computer's first movement, contemplating the game's strategy
+ */
 -(void)makeInitalMove {
     if (positions[4] == 0) {
         [self makeMoveToPosition:4];
@@ -236,7 +270,10 @@ int const WINNER_O = 2;
     }
 }
 
-
+/*
+ * Method to render on screen the red line indicating the winning line for any given player
+ * @param lineNumber: Position on screen where the line should be displayed
+ */
 -(void)makeWinningLineWith:(int) lineNumber {
     if (turn % 2 == 0) {
         win = WINNER_O;
@@ -285,6 +322,9 @@ int const WINNER_O = 2;
     [self setFinalMessage];
 }
 
+/*
+ * Method to render the announcement of the winning player
+ */
 -(void)setFinalMessage {
     if (win) {
         if (win == WINNER_X) {
@@ -298,6 +338,11 @@ int const WINNER_O = 2;
     [buttonStart setTitle:@"Try again?" forState:UIControlStateNormal ];
 }
 
+/*
+ * Method to identify then next blank corner, if any.
+ * @param position: Position on screen selected by the player
+ * @return int: The position on screen if available or -1 if not.
+ */
 -(int)nextBlankCornerFor:(int) position {
     int blankCorener = -1;
     
@@ -329,6 +374,10 @@ int const WINNER_O = 2;
     return blankCorener;
 }
 
+/*
+ * Method to identify the position on screen where the computer can win the match, if there is any chance at its current turn.
+ * @return int: The position on screen if available or -1 if not.
+ */
 -(int)checkForKillingMove {
     int killingPosition = -1;
     
@@ -362,6 +411,11 @@ int const WINNER_O = 2;
     return killingPosition;
 }
 
+/*
+ * Method to identify the next best position for the computer's move.
+ * @param position: Position on screen of the player's last movement
+ * @return int: The position on screen for the movement
+ */
 -(int)searchBlankSpotFor:(int) position {
     int blankSpot = -1;
     int blankCorner;
@@ -406,6 +460,11 @@ int const WINNER_O = 2;
     return blankSpot;
 }
 
+/*
+ * Method to identify the position on screen if any of the players won and if not, kick off the search for the computer's next move
+ * @param position: Position on screen of the player's last movement
+ * @return int: The position on screen if available or -1 if not.
+ */
 -(int)chekWinningPositionWith:(int) position {
     int nextPosition = -1;
     int killingPosition = -1;
