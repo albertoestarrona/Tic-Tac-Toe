@@ -23,6 +23,7 @@
 		D2D969F5219649150003CFE4 /* icon_29@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D2D969F0219649150003CFE4 /* icon_29@2x.jpg */; };
 		D2D969F6219649150003CFE4 /* icon_29@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D2D969F1219649150003CFE4 /* icon_29@3x.jpg */; };
 		D2D969F821964B7A0003CFE4 /* avatar_2.png in Resources */ = {isa = PBXBuildFile; fileRef = D2D969F721964B7A0003CFE4 /* avatar_2.png */; };
+		D2D96A12219662920003CFE4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D29F95092191EE6A00F9BFA1 /* ViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -257,6 +258,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2D96A12219662920003CFE4 /* ViewController.m in Sources */,
 				D29F951F2191EE6B00F9BFA1 /* Tic_Tac_ToeTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

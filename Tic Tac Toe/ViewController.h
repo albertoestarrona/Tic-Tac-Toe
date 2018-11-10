@@ -33,4 +33,10 @@ extern int const WINNER_O;
 @property (weak, nonatomic) IBOutlet UILabel *msgLabel;
 @property (weak, nonatomic) IBOutlet UIButton *buttonStart;
 
+-(int)checkForKillingMove;
+-(int)searchBlankSpotFor:(int) position;
+-(int)nextBlankCornerFor:(int) position;
+-(int)chekWinningPositionWith:(int) position;
+-(int)getPosition:(id)button;
+
 @end

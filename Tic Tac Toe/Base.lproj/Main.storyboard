@@ -183,7 +183,7 @@
                                 </constraints>
                             </imageView>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line45.png" translatesAutoresizingMaskIntoConstraints="NO" id="o07-ze-oL7">
-                                <rect key="frame" x="72.5" y="218.5" width="230" height="230"/>
+                                <rect key="frame" x="73" y="219" width="230" height="230"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="230" id="NjJ-3A-XaR"/>
                                     <constraint firstAttribute="width" constant="230" id="w4g-XH-SST"/>

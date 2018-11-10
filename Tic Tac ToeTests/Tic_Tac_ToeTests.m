@@ -7,31 +7,46 @@
 //
 
 #import <XCTest/XCTest.h>
+#import <UIKit/UIKit.h>
+#import "ViewController.h"
 
 @interface Tic_Tac_ToeTests : XCTestCase
+
+@property (nonatomic) ViewController *vcTest;
 
 @end
 
 @implementation Tic_Tac_ToeTests
 
 - (void)setUp {
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+    [super setUp];
+    
+    self.vcTest = [[ViewController alloc] init];
 }
 
-- (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
+- (void)testKillingMove {
+    int position = [self.vcTest checkForKillingMove];
+    XCTAssertEqual(position, -1);
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
+-(void)testSearchForBlankSpot {
+    int position = [self.vcTest searchBlankSpotFor:0];
+    XCTAssertEqual(position, 2);
 }
 
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
+-(void)testForBlankCorner {
+    int position = [self.vcTest nextBlankCornerFor:8];
+    XCTAssertEqual(position, 2);
+}
+
+-(void)testForWinningPosition {
+    int position = [self.vcTest chekWinningPositionWith:3];
+    XCTAssertEqual(position, 0);
+}
+
+-(void)testGetPosition {
+    int position = [self.vcTest getPosition:self.vcTest.buttonPos1];
+    XCTAssertEqual(position, 0);
 }
 
 @end
