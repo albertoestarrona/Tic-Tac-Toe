@@ -16,6 +16,8 @@ extern int const WINNER_O;
 extern int const PLAYER;
 extern int const COMPUTER;
 
+@property NSMutableArray *positions;
+
 @property (weak, nonatomic) IBOutlet UIButton *buttonPos1;
 @property (weak, nonatomic) IBOutlet UIButton *buttonPos2;
 @property (weak, nonatomic) IBOutlet UIButton *buttonPos3;

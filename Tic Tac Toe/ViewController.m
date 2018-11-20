@@ -10,7 +10,7 @@
 
 @interface ViewController () {
     @private  int turn;
-    @private    int positions[9];
+    @private    NSMutableArray *positions;
     @private    int valuePosition;
     @private    int win;
 }
@@ -24,7 +24,7 @@ int const PLAYER = 0;
 int const COMPUTER = 1;
 
 @implementation ViewController
-@synthesize buttonPos1, buttonPos2, buttonPos3, buttonPos4, buttonPos5, buttonPos6, buttonPos7, buttonPos8, buttonPos9, winningLine1, winningLine2, winningLine3, winningLine4, winningLine5, winningLine6, winningLine78, msgLabel, buttonStart;
+@synthesize buttonPos1, buttonPos2, buttonPos3, buttonPos4, buttonPos5, buttonPos6, buttonPos7, buttonPos8, buttonPos9, winningLine1, winningLine2, winningLine3, winningLine4, winningLine5, winningLine6, winningLine78, msgLabel, buttonStart, positions;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,9 +37,12 @@ int const COMPUTER = 1;
     // Set all initial conditions
     turn = 0;
     win = NO_WINNER;
-    for (int index = 0; index < 9; index++) {
+    id objects = @[@0, @0, @0, @0, @0, @0, @0, @0, @0];
+    positions = [NSMutableArray arrayWithCapacity:9];
+    [positions addObjectsFromArray:objects];
+    /*for (int index = 0; index < 9; index++) {
         positions[index] = 0;
-    }
+    }*/
     
     // Reset UI
     [self resetButtons];
@@ -87,7 +90,7 @@ int const COMPUTER = 1;
         
         switch (turn) {
             case 1:{
-                positions[positionSelected] = valuePosition;
+                positions[positionSelected] = @(valuePosition);
                 turn++;
                 dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
                 dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -96,16 +99,16 @@ int const COMPUTER = 1;
                 return;
             } break;
             case 3:{
-                positions[positionSelected] = valuePosition;
+                positions[positionSelected] = @(valuePosition);
             } break;
             case 5: {
-                positions[positionSelected] = valuePosition;
+                positions[positionSelected] = @(valuePosition);
             } break;
             case 7: {
-                positions[positionSelected] = valuePosition;
+                positions[positionSelected] = @(valuePosition);
             } break;
             case 9: {
-                positions[positionSelected] = valuePosition;
+                positions[positionSelected] = @(valuePosition);
             } break;
                 
             default:
@@ -191,63 +194,63 @@ int const COMPUTER = 1;
         case 0:
             if (player == COMPUTER) {
                 [self getPosition:buttonPos1];
-                positions[position] = -1 * valuePosition;
+                positions[position] = @(-1 * valuePosition);
             }
             [buttonPos1 setTitle:signChar forState:UIControlStateNormal];
             break;
         case 1:
             if (player == COMPUTER) {
                 [self getPosition:buttonPos2];
-                positions[position] = -1 * valuePosition;
+                positions[position] = @(-1 * valuePosition);
             }
             [buttonPos2 setTitle:signChar forState:UIControlStateNormal];
             break;
         case 2:
             if (player == COMPUTER) {
                 [self getPosition:buttonPos3];
-                positions[position] = -1 * valuePosition;
+                positions[position] = @(-1 * valuePosition);
             }
             [buttonPos3 setTitle:signChar forState:UIControlStateNormal];
             break;
         case 3:
             if (player == COMPUTER) {
                 [self getPosition:buttonPos4];
-                positions[position] = -1 * valuePosition;
+                positions[position] = @(-1 * valuePosition);
             }
             [buttonPos4 setTitle:signChar forState:UIControlStateNormal];
             break;
         case 4:
             if (player == COMPUTER) {
                 [self getPosition:buttonPos5];
-                positions[position] = -1 * valuePosition;
+                positions[position] = @(-1 * valuePosition);
             }
             [buttonPos5 setTitle:signChar forState:UIControlStateNormal];
             break;
         case 5:
             if (player == COMPUTER) {
                 [self getPosition:buttonPos6];
-                positions[position] = -1 * valuePosition;
+                positions[position] = @(-1 * valuePosition);
             }
             [buttonPos6 setTitle:signChar forState:UIControlStateNormal];
             break;
         case 6:
             if (player == COMPUTER) {
                 [self getPosition:buttonPos7];
-                positions[position] = -1 * valuePosition;
+                positions[position] = @(-1 * valuePosition);
             }
             [buttonPos7 setTitle:signChar forState:UIControlStateNormal];
             break;
         case 7:
             if (player == COMPUTER) {
                 [self getPosition:buttonPos8];
-                positions[position] = -1 * valuePosition;
+                positions[position] = @(-1 * valuePosition);
             }
             [buttonPos8 setTitle:signChar forState:UIControlStateNormal];
             break;
         case 8:
             if (player == COMPUTER) {
                 [self getPosition:buttonPos9];
-                positions[position] = -1 * valuePosition;
+                positions[position] = @(-1 * valuePosition);
             }
             [buttonPos9 setTitle:signChar forState:UIControlStateNormal];
             break;
@@ -260,9 +263,9 @@ int const COMPUTER = 1;
  * Method for the computer's first movement, contemplating the game's strategy
  */
 -(void)makeInitalMove {
-    if (positions[4] == 0) {
+    if ([positions[4] intValue] == 0) {
         [self setUIPosition:4 forPlayer:COMPUTER];
-    } else if (positions[0] == 0) {
+    } else if ([positions[0] intValue] == 0) {
         [self setUIPosition:0 forPlayer:COMPUTER];
     } else {
         [self setUIPosition:2 forPlayer:COMPUTER];
@@ -347,24 +350,24 @@ int const COMPUTER = 1;
     
     switch (position) {
         case 0:
-            if (positions[2] == 0) blankCorener = 2;
-            else if (positions[6] == 0) blankCorener = 6;
-            else if (positions[8] == 0) blankCorener = 8;
+            if ([positions[2] intValue] == 0) blankCorener = 2;
+            else if ([positions[6] intValue] == 0) blankCorener = 6;
+            else if ([positions[8] intValue] == 0) blankCorener = 8;
             break;
         case 2:
-            if (positions[0] == 0) blankCorener = 0;
-            else if (positions[6] == 0) blankCorener = 6;
-            else if (positions[8] == 0) blankCorener = 8;
+            if ([positions[0] intValue] == 0) blankCorener = 0;
+            else if ([positions[6] intValue] == 0) blankCorener = 6;
+            else if ([positions[8] intValue] == 0) blankCorener = 8;
             break;
         case 6:
-            if (positions[2] == 0) blankCorener = 2;
-            else if (positions[2] == 0) blankCorener = 2;
-            else if (positions[8] == 0) blankCorener = 8;
+            if ([positions[2] intValue] == 0) blankCorener = 2;
+            else if ([positions[2] intValue] == 0) blankCorener = 2;
+            else if ([positions[8] intValue] == 0) blankCorener = 8;
             break;
         case 8:
-            if (positions[2] == 0) blankCorener = 2;
-            else if (positions[6] == 0) blankCorener = 6;
-            else if (positions[0] == 0) blankCorener = 0;
+            if ([positions[2] intValue] == 0) blankCorener = 2;
+            else if ([positions[6] intValue] == 0) blankCorener = 6;
+            else if ([positions[0] intValue] == 0) blankCorener = 0;
             break;
         default:
             break;
@@ -380,32 +383,32 @@ int const COMPUTER = 1;
 -(int)checkForKillingMove {
     int killingPosition = -1;
     
-    if ((positions[0] + positions[1] + positions[2]) == -4 ) killingPosition = 2;
-    else if ((positions[0] + positions[1] + positions[2]) == -10 ) killingPosition = 1;
-    else if ((positions[0] + positions[1] + positions[2]) == -12 ) killingPosition = 0;
-    else if ((positions[3] + positions[4] + positions[5]) == -44 ) killingPosition = 5;
-    else if ((positions[3] + positions[4] + positions[5]) == -110 ) killingPosition = 4;
-    else if ((positions[3] + positions[4] + positions[5]) == -132 ) killingPosition = 3;
-    else if ((positions[6] + positions[7] + positions[8]) == -444 ) killingPosition = 8;
-    else if ((positions[6] + positions[7] + positions[8]) == -1110 ) killingPosition = 7;
-    else if ((positions[6] + positions[7] + positions[8]) == -1332 ) killingPosition = 6;
+    if ([positions[0] intValue] + [positions[1] intValue] + [positions[2] intValue] == -4) killingPosition = 2;
+    else if ([positions[0] intValue] + [positions[1]  intValue] + [positions[2] intValue] == -10 ) killingPosition = 1;
+    else if ([positions[0] intValue] + [positions[1] intValue] + [positions[2] intValue] == -12 ) killingPosition = 0;
+    else if ([positions[3] intValue] + [positions[4] intValue] + [positions[5] intValue] == -44 ) killingPosition = 5;
+    else if ([positions[3] intValue] + [positions[4] intValue] + [positions[5] intValue] == -110 ) killingPosition = 4;
+    else if ([positions[3] intValue] + [positions[4] intValue] + [positions[5] intValue] == -132 ) killingPosition = 3;
+    else if ([positions[6] intValue] + [positions[7] intValue] + [positions[8] intValue] == -444 ) killingPosition = 8;
+    else if ([positions[6] intValue] + [positions[7] intValue] + [positions[8] intValue] == -1110 ) killingPosition = 7;
+    else if ([positions[6] intValue] + [positions[7] intValue] + [positions[8] intValue] == -1332 ) killingPosition = 6;
     
-    else if ((positions[0] + positions[3] + positions[6]) == -12 ) killingPosition = 6;
-    else if ((positions[0] + positions[3] + positions[6]) == -112 ) killingPosition = 3;
-    else if ((positions[0] + positions[3] + positions[6]) == -122 ) killingPosition = 0;
-    else if ((positions[1] + positions[4] + positions[7]) == -36 ) killingPosition = 7;
-    else if ((positions[1] + positions[4] + positions[7]) == -336 ) killingPosition = 4;
-    else if ((positions[1] + positions[4] + positions[7]) == -366 ) killingPosition = 1;
-    else if ((positions[2] + positions[5] + positions[8]) == -108 ) killingPosition = 8;
-    else if ((positions[2] + positions[5] + positions[8]) == -1008 ) killingPosition = 5;
-    else if ((positions[2] + positions[5] + positions[8]) == -1098 ) killingPosition = 2;
+    else if ([positions[0] intValue] + [positions[3] intValue] + [positions[6] intValue] == -12 ) killingPosition = 6;
+    else if ([positions[0] intValue] + [positions[3] intValue] + [positions[6] intValue] == -112 ) killingPosition = 3;
+    else if ([positions[0] intValue] + [positions[3] intValue] + [positions[6] intValue] == -122 ) killingPosition = 0;
+    else if ([positions[1] intValue] + [positions[4] intValue] + [positions[7] intValue] == -36 ) killingPosition = 7;
+    else if ([positions[1] intValue] + [positions[4] intValue] + [positions[7] intValue] == -336 ) killingPosition = 4;
+    else if ([positions[1] intValue] + [positions[4] intValue] + [positions[7] intValue] == -366 ) killingPosition = 1;
+    else if ([positions[2] intValue] + [positions[5] intValue] + [positions[8] intValue] == -108 ) killingPosition = 8;
+    else if ([positions[2] intValue] + [positions[5] intValue] + [positions[8] intValue] == -1008 ) killingPosition = 5;
+    else if ([positions[2] intValue] + [positions[5] intValue] + [positions[8] intValue] == -1098 ) killingPosition = 2;
     
-    else if ((positions[0] + positions[4] + positions[8]) == -34 ) killingPosition = 8;
-    else if ((positions[0] + positions[4] + positions[8]) == -1000 ) killingPosition = 4;
-    else if ((positions[0] + positions[4] + positions[8]) == -1032 ) killingPosition = 0;
-    else if ((positions[6] + positions[4] + positions[2]) == -42 ) killingPosition = 6;
-    else if ((positions[6] + positions[4] + positions[2]) == -120 ) killingPosition = 4;
-    else if ((positions[6] + positions[4] + positions[2]) == -144 ) killingPosition = 2;
+    else if ([positions[0] intValue] + [positions[4] intValue] + [positions[8] intValue] == -34 ) killingPosition = 8;
+    else if ([positions[0] intValue] + [positions[4] intValue] + [positions[8] intValue] == -1000 ) killingPosition = 4;
+    else if ([positions[0] intValue] + [positions[4] intValue] + [positions[8] intValue] == -1032 ) killingPosition = 0;
+    else if ([positions[6] intValue] + [positions[4] intValue] + [positions[2] intValue] == -42 ) killingPosition = 6;
+    else if ([positions[6] intValue] + [positions[4] intValue] + [positions[2] intValue] == -120 ) killingPosition = 4;
+    else if ([positions[6] intValue] + [positions[4] intValue] + [positions[2] intValue] == -144 ) killingPosition = 2;
     
     return killingPosition;
 }
@@ -423,26 +426,26 @@ int const COMPUTER = 1;
         case 0:
             blankCorner = [self nextBlankCornerFor:0];
             if (blankCorner != -1 && turn != 3) blankSpot = blankCorner;
-            else if (positions[1] == 0) blankSpot = 1;
-            else if (positions[3] == 0) blankSpot = 3;
+            else if ([positions[1] intValue] == 0) blankSpot = 1;
+            else if ([positions[3] intValue] == 0) blankSpot = 3;
             break;
         case 2:
             blankCorner = [self nextBlankCornerFor:2];
             if (blankCorner != -1 && turn != 3) blankSpot = blankCorner;
-            else if (positions[5] == 0) blankSpot = 5;
-            else if (positions[1] == 0) blankSpot = 1;
+            else if ([positions[5] intValue] == 0) blankSpot = 5;
+            else if ([positions[1] intValue] == 0) blankSpot = 1;
             break;
         case 8:
             blankCorner = [self nextBlankCornerFor:8];
-            if ((blankCorner != -1 && turn != 3) || (blankCorner != -1 && positions[4] > 0)) blankSpot = blankCorner;
-            else if (positions[7] == 0) blankSpot = 7;
-            else if (positions[5] == 0) blankSpot = 5;
+            if ((blankCorner != -1 && turn != 3) || (blankCorner != -1 && [positions[4] intValue] > 0)) blankSpot = blankCorner;
+            else if ([positions[7] intValue] == 0) blankSpot = 7;
+            else if ([positions[5] intValue] == 0) blankSpot = 5;
             break;
         case 6:
             blankCorner = [self nextBlankCornerFor:6];
             if (blankCorner != -1 && turn != 3) blankSpot = blankCorner;
-            else if (positions[3] == 0) blankSpot = 3;
-            else if (positions[7] == 0) blankSpot = 7;
+            else if ([positions[3] intValue] == 0) blankSpot = 3;
+            else if ([positions[7] intValue] == 0) blankSpot = 7;
             break;
         default:
             break;
@@ -450,7 +453,7 @@ int const COMPUTER = 1;
     
     if (blankSpot == -1) {
         for (int index = 0; index < 9; index++) {
-            if (positions[index] == 0) {
+            if ([positions[index] intValue] == 0) {
                 blankSpot = index;
                 break;
             }
@@ -470,26 +473,26 @@ int const COMPUTER = 1;
     
     switch (position) {
         case 0: {
-            if (abs(positions[0] + positions[1] + positions[2]) == 13) {
+            if (abs([positions[0] intValue] + [positions[1] intValue] + [positions[2] intValue]) == 13) {
                 [self makeWinningLineWith:1];
-            } else if (abs(positions[0] + positions[3] + positions[6]) == 123) {
+            } else if (abs([positions[0] intValue] + [positions[3] intValue] + [positions[6] intValue]) == 123) {
                 [self makeWinningLineWith:4];
-            } else if (abs(positions[0] + positions[4] + positions[8]) == 1033) {
+            } else if (abs([positions[0] intValue] + [positions[4] intValue] + [positions[8] intValue]) == 1033) {
                 [self makeWinningLineWith:7];
             } else {
                 killingPosition = [self checkForKillingMove];
                 if (killingPosition != -1) nextPosition = killingPosition;
-                else if ((positions[1] + positions[2]) == 3) {
+                else if (([positions[1] intValue] + [positions[2] intValue]) == 3) {
                     nextPosition = 2;
-                } else if ((positions[1] + positions[2]) == 9) {
+                } else if (([positions[1] intValue] + [positions[2] intValue]) == 9) {
                     nextPosition = 1;
-                } else if ((positions[4] + positions[8]) == 33) {
+                } else if (([positions[4] intValue] + [positions[8] intValue]) == 33) {
                     nextPosition = 8;
-                } else if ((positions[4] + positions[8]) == 999) {
+                } else if (([positions[4] intValue] + [positions[8] intValue]) == 999) {
                     nextPosition = 4;
-                } else if ((positions[3] + positions[6]) == 11) {
+                } else if (([positions[3] intValue] + [positions[6] intValue]) == 11) {
                     nextPosition = 6;
-                } else if ((positions[3] + positions[6]) == 111) {
+                } else if (([positions[3] intValue] + [positions[6] intValue]) == 111) {
                     nextPosition = 3;
                 } else {
                     nextPosition = [self searchBlankSpotFor:0];
@@ -497,20 +500,20 @@ int const COMPUTER = 1;
             }
         } break;
         case 1: {
-            if (abs(positions[0] + positions[1] + positions[2]) == 13) {
+            if (abs([positions[0] intValue] + [positions[1] intValue] + [positions[2] intValue]) == 13) {
                 [self makeWinningLineWith:1];
-            } else if (abs(positions[1] + positions[4] + positions[7]) == 369) {
+            } else if (abs([positions[1] intValue] + [positions[4] intValue] + [positions[7] intValue]) == 369) {
                 [self makeWinningLineWith:5];
             } else {
                 killingPosition = [self checkForKillingMove];
                 if (killingPosition != -1) nextPosition = killingPosition;
-                else if ((positions[0] + positions[2]) == 1) {
+                else if (([positions[0] intValue] + [positions[2] intValue]) == 1) {
                     nextPosition = 2;
-                } else if ((positions[0] + positions[2]) == 9) {
+                } else if (([positions[0] intValue] + [positions[2] intValue]) == 9) {
                     nextPosition = 0;
-                } else if ((positions[4] + positions[7]) == 33) {
+                } else if (([positions[4] intValue] + [positions[7] intValue]) == 33) {
                     nextPosition = 7;
-                } else if ((positions[4] + positions[7]) == 333) {
+                } else if (([positions[4] intValue] + [positions[7] intValue]) == 333) {
                     nextPosition = 4;
                 } else {
                     nextPosition = [self searchBlankSpotFor:1];
@@ -518,26 +521,26 @@ int const COMPUTER = 1;
             }
         } break;
         case 2: {
-            if (abs(positions[0] + positions[1] + positions[2]) == 13) {
+            if (abs([positions[0] intValue] + [positions[1] intValue] + [positions[2] intValue]) == 13) {
                 [self makeWinningLineWith:1];
-            } else if (abs(positions[2] + positions[5] + positions[8]) == 1107) {
+            } else if (abs([positions[2] intValue] + [positions[5] intValue] + [positions[8] intValue]) == 1107) {
                 [self makeWinningLineWith:6];
-            } else if (abs(positions[2] + positions[4] + positions[6]) == 153) {
+            } else if (abs([positions[2] intValue] + [positions[4] intValue] + [positions[6] intValue]) == 153) {
                 [self makeWinningLineWith:8];
             } else {
                 killingPosition = [self checkForKillingMove];
                 if (killingPosition != -1) nextPosition = killingPosition;
-                else if ((positions[0] + positions[1]) == 1) {
+                else if (([positions[0] intValue] + [positions[1] intValue]) == 1) {
                     nextPosition = 1;
-                } else if ((positions[0] + positions[1]) == 3) {
+                } else if (([positions[0] intValue] + [positions[1] intValue]) == 3) {
                     nextPosition = 0;
-                } else if ((positions[4] + positions[6]) == 33) {
+                } else if (([positions[4] intValue] + [positions[6] intValue]) == 33) {
                     nextPosition = 6;
-                } else if ((positions[4] + positions[6]) == 111) {
+                } else if (([positions[4] intValue] + [positions[6] intValue]) == 111) {
                     nextPosition = 4;
-                } else if ((positions[5] + positions[8]) == 99) {
+                } else if (([positions[5] intValue] + [positions[8] intValue]) == 99) {
                     nextPosition = 8;
-                } else if ((positions[5] + positions[8]) == 999) {
+                } else if (([positions[5] intValue] + [positions[8] intValue]) == 999) {
                     nextPosition = 5;
                 } else {
                     nextPosition = [self searchBlankSpotFor:2];
@@ -545,18 +548,18 @@ int const COMPUTER = 1;
             }
         } break;
         case 3: {
-            if (abs(positions[0] + positions[3] + positions[6]) == 123) {
+            if (abs([positions[0] intValue] + [positions[3] intValue] + [positions[6] intValue]) == 123) {
                 [self makeWinningLineWith:4];
-            } else if (abs(positions[3] + positions[4] + positions[5]) == 143) {
+            } else if (abs([positions[3] intValue] + [positions[4] intValue] + [positions[5] intValue]) == 143) {
                 [self makeWinningLineWith:2];
             } else {
                 killingPosition = [self checkForKillingMove];
                 if (killingPosition != -1) nextPosition = killingPosition;
-                else if ((positions[0] + positions[6]) == 1) {
+                else if (([positions[0] intValue] + [positions[6] intValue]) == 1) {
                     nextPosition = 6;
-                } else if ((positions[0] + positions[6]) == 111) {
+                } else if (([positions[0] intValue] + [positions[6] intValue]) == 111) {
                     nextPosition = 0;
-                } else if ((positions[4] + positions[5]) == 33) {
+                } else if (([positions[4] intValue] + [positions[5] intValue]) == 33) {
                     nextPosition = 5;
                 } else {
                     nextPosition = [self searchBlankSpotFor:3];
@@ -564,18 +567,18 @@ int const COMPUTER = 1;
             }
         } break;
         case 5: {
-            if (abs(positions[2] + positions[5] + positions[8]) == 1107) {
+            if (abs([positions[2] intValue] + [positions[5] intValue] + [positions[8] intValue]) == 1107) {
                 [self makeWinningLineWith:6];
-            } else if (abs(positions[3] + positions[4] + positions[5]) == 143) {
+            } else if (abs([positions[3] intValue] + [positions[4] intValue] + [positions[5] intValue]) == 143) {
                 [self makeWinningLineWith:2];
             } else {
                 killingPosition = [self checkForKillingMove];
                 if (killingPosition != -1) nextPosition = killingPosition;
-                else if ((positions[2] + positions[8]) == 9) {
+                else if (([positions[2] intValue] + [positions[8] intValue]) == 9) {
                     nextPosition = 8;
-                } else if ((positions[2] + positions[8]) == 999) {
+                } else if (([positions[2] intValue] + [positions[8] intValue]) == 999) {
                     nextPosition = 2;
-                } else if ((positions[3] + positions[4]) == 33) {
+                } else if (([positions[3] intValue] + [positions[4] intValue]) == 33) {
                     nextPosition = 3;
                 } else {
                     nextPosition = [self searchBlankSpotFor:5];
@@ -583,26 +586,26 @@ int const COMPUTER = 1;
             }
         } break;
         case 6: {
-            if (abs(positions[0] + positions[3] + positions[6]) == 123) {
+            if (abs([positions[0] intValue] + [positions[3] intValue] + [positions[6] intValue]) == 123) {
                 [self makeWinningLineWith:4];
-            } else if (abs(positions[6] + positions[7] + positions[8]) == 1443) {
+            } else if (abs([positions[6] intValue] + [positions[7] intValue] + [positions[8] intValue]) == 1443) {
                 [self makeWinningLineWith:3];
-            } else if (abs(positions[2] + positions[4] + positions[6]) == 153) {
+            } else if (abs([positions[2] intValue] + [positions[4] intValue] + [positions[6] intValue]) == 153) {
                 [self makeWinningLineWith:8];
             } else {
                 killingPosition = [self checkForKillingMove];
                 if (killingPosition != -1) nextPosition = killingPosition;
-                else if ((positions[0] + positions[3]) == 1) {
+                else if (([positions[0] intValue] + [positions[3] intValue]) == 1) {
                     nextPosition = 3;
-                } else if ((positions[0] + positions[3]) == 11) {
+                } else if (([positions[0] intValue] + [positions[3] intValue]) == 11) {
                     nextPosition = 0;
-                } else if ((positions[4] + positions[2]) == 33) {
+                } else if (([positions[4] intValue] + [positions[2] intValue]) == 33) {
                     nextPosition = 2;
-                } else if ((positions[4] + positions[2]) == 9) {
+                } else if (([positions[4] intValue] + [positions[2] intValue]) == 9) {
                     nextPosition = 4;
-                } else if ((positions[7] + positions[8]) == 333) {
+                } else if (([positions[7] intValue] + [positions[8] intValue]) == 333) {
                     nextPosition = 8;
-                } else if ((positions[7] + positions[8]) == 999) {
+                } else if (([positions[7] intValue] + [positions[8] intValue]) == 999) {
                     nextPosition = 7;
                 } else {
                     nextPosition = [self searchBlankSpotFor:6];
@@ -610,18 +613,18 @@ int const COMPUTER = 1;
             }
         } break;
         case 7: {
-            if (abs(positions[1] + positions[4] + positions[7]) == 369) {
+            if (abs([positions[1] intValue] + [positions[4] intValue] + [positions[7] intValue]) == 369) {
                 [self makeWinningLineWith:5];
-            } else if (abs(positions[6] + positions[7] + positions[8]) == 1443) {
+            } else if (abs([positions[6] intValue] + [positions[7] intValue] + [positions[8] intValue]) == 1443) {
                 [self makeWinningLineWith:3];
             } else {
                 killingPosition = [self checkForKillingMove];
                 if (killingPosition != -1) nextPosition = killingPosition;
-                else if ((positions[6] + positions[8]) == 111) {
+                else if (([positions[6] intValue] + [positions[8] intValue]) == 111) {
                     nextPosition = 8;
-                } else if ((positions[6] + positions[8]) == 999) {
+                } else if (([positions[6] intValue] + [positions[8] intValue]) == 999) {
                     nextPosition = 6;
-                } else if ((positions[1] + positions[4]) == 33) {
+                } else if (([positions[1] intValue] + [positions[4] intValue]) == 33) {
                     nextPosition = 1;
                 } else {
                     nextPosition = [self searchBlankSpotFor:7];
@@ -629,26 +632,26 @@ int const COMPUTER = 1;
             }
         } break;
         case 8: {
-            if (abs(positions[2] + positions[5] + positions[8]) == 1107) {
+            if (abs([positions[2] intValue] + [positions[5] intValue] + [positions[8] intValue]) == 1107) {
                 [self makeWinningLineWith:6];
-            } else if (abs(positions[6] + positions[7] + positions[8]) == 1443) {
+            } else if (abs([positions[6] intValue] + [positions[7] intValue] + [positions[8] intValue]) == 1443) {
                 [self makeWinningLineWith:3];
-            } else if (abs(positions[0] + positions[4] + positions[8]) == 1033) {
+            } else if (abs([positions[0] intValue] + [positions[4] intValue] + [positions[8] intValue]) == 1033) {
                 [self makeWinningLineWith:7];
             } else {
                 killingPosition = [self checkForKillingMove];
                 if (killingPosition != -1) nextPosition = killingPosition;
-                else if ((positions[2] + positions[5]) == 9) {
+                else if (([positions[2] intValue] + [positions[5] intValue]) == 9) {
                     nextPosition = 5;
-                } else if ((positions[2] + positions[5]) == 99) {
+                } else if (([positions[2] intValue] + [positions[5] intValue]) == 99) {
                     nextPosition = 2;
-                } else if ((positions[4] + positions[0]) == 33) {
+                } else if (([positions[4] intValue] + [positions[0] intValue]) == 33) {
                     nextPosition = 0;
-                } else if ((positions[4] + positions[0]) == 1) {
+                } else if (([positions[4] intValue] + [positions[0] intValue]) == 1) {
                     nextPosition = 4;
-                } else if ((positions[6] + positions[7]) == 333) {
+                } else if (([positions[6] intValue] + [positions[7] intValue]) == 333) {
                     nextPosition = 6;
-                } else if ((positions[6] + positions[7]) == 111) {
+                } else if (([positions[6] intValue] + [positions[7] intValue]) == 111) {
                     nextPosition = 7;
                 } else {
                     nextPosition = [self searchBlankSpotFor:8];
