@@ -20,6 +20,9 @@ int const NO_WINNER = 0;
 int const WINNER_X = 1;
 int const WINNER_O = 2;
 
+int const PLAYER = 0;
+int const COMPUTER = 1;
+
 @implementation ViewController
 @synthesize buttonPos1, buttonPos2, buttonPos3, buttonPos4, buttonPos5, buttonPos6, buttonPos7, buttonPos8, buttonPos9, winningLine1, winningLine2, winningLine3, winningLine4, winningLine5, winningLine6, winningLine78, msgLabel, buttonStart;
 
@@ -80,7 +83,7 @@ int const WINNER_O = 2;
         turn++;
         int nextPosition;
         int positionSelected = [self getPosition:sender];
-        [self setUIPosition:positionSelected];
+        [self setUIPosition:positionSelected forPlayer:PLAYER];
         
         switch (turn) {
             case 1:{
@@ -114,7 +117,7 @@ int const WINNER_O = 2;
             turn++;
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                [self makeMoveToPosition:nextPosition];
+                [self setUIPosition:nextPosition forPlayer: COMPUTER];
                 [self chekWinningPositionWith:nextPosition];
             });
         }
@@ -173,10 +176,11 @@ int const WINNER_O = 2;
 }
 
 /*
-* Method to mark on screen the sign depending on the player in turn
+* Method to mark on screen the sign depending on the player in turn and draw the respective move
 * @param position: Position on screen where the sign should be rendered
+* @param player: Player in turn
 */
--(void)setUIPosition:(int) position {
+-(void)setUIPosition:(int) position forPlayer:(int) player {
     NSString *signChar = [[NSString alloc] init];
     if (turn % 2 == 0) {
         signChar = @"O";
@@ -185,30 +189,66 @@ int const WINNER_O = 2;
     }
     switch (position) {
         case 0:
+            if (player == COMPUTER) {
+                [self getPosition:buttonPos1];
+                positions[position] = -1 * valuePosition;
+            }
             [buttonPos1 setTitle:signChar forState:UIControlStateNormal];
             break;
         case 1:
+            if (player == COMPUTER) {
+                [self getPosition:buttonPos2];
+                positions[position] = -1 * valuePosition;
+            }
             [buttonPos2 setTitle:signChar forState:UIControlStateNormal];
             break;
         case 2:
+            if (player == COMPUTER) {
+                [self getPosition:buttonPos3];
+                positions[position] = -1 * valuePosition;
+            }
             [buttonPos3 setTitle:signChar forState:UIControlStateNormal];
             break;
         case 3:
+            if (player == COMPUTER) {
+                [self getPosition:buttonPos4];
+                positions[position] = -1 * valuePosition;
+            }
             [buttonPos4 setTitle:signChar forState:UIControlStateNormal];
             break;
         case 4:
+            if (player == COMPUTER) {
+                [self getPosition:buttonPos5];
+                positions[position] = -1 * valuePosition;
+            }
             [buttonPos5 setTitle:signChar forState:UIControlStateNormal];
             break;
         case 5:
+            if (player == COMPUTER) {
+                [self getPosition:buttonPos6];
+                positions[position] = -1 * valuePosition;
+            }
             [buttonPos6 setTitle:signChar forState:UIControlStateNormal];
             break;
         case 6:
+            if (player == COMPUTER) {
+                [self getPosition:buttonPos7];
+                positions[position] = -1 * valuePosition;
+            }
             [buttonPos7 setTitle:signChar forState:UIControlStateNormal];
             break;
         case 7:
+            if (player == COMPUTER) {
+                [self getPosition:buttonPos8];
+                positions[position] = -1 * valuePosition;
+            }
             [buttonPos8 setTitle:signChar forState:UIControlStateNormal];
             break;
         case 8:
+            if (player == COMPUTER) {
+                [self getPosition:buttonPos9];
+                positions[position] = -1 * valuePosition;
+            }
             [buttonPos9 setTitle:signChar forState:UIControlStateNormal];
             break;
         default:
@@ -217,56 +257,15 @@ int const WINNER_O = 2;
 }
 
 /*
- * Method to create on screen the computer's move at its turn
- * @param position: Position on screen where the movement should be created
- */
--(void)makeMoveToPosition:(int) position {
-    switch (position) {
-        case 0:
-            [self getPosition:buttonPos1];
-            break;
-        case 1:
-            [self getPosition:buttonPos2];
-            break;
-        case 2:
-            [self getPosition:buttonPos3];
-            break;
-        case 3:
-            [self getPosition:buttonPos4];
-            break;
-        case 4:
-            [self getPosition:buttonPos5];
-            break;
-        case 5:
-            [self getPosition:buttonPos6];
-            break;
-        case  6:
-            [self getPosition:buttonPos7];
-            break;
-        case 7:
-            [self getPosition:buttonPos8];
-            break;
-        case 8:
-            [self getPosition:buttonPos9];
-            break;
-        default:
-            break;
-    }
-    
-    [self setUIPosition:position];
-    positions[position] = -1 * valuePosition;
-}
-
-/*
  * Method for the computer's first movement, contemplating the game's strategy
  */
 -(void)makeInitalMove {
     if (positions[4] == 0) {
-        [self makeMoveToPosition:4];
+        [self setUIPosition:4 forPlayer:COMPUTER];
     } else if (positions[0] == 0) {
-        [self makeMoveToPosition:0];
+        [self setUIPosition:0 forPlayer:COMPUTER];
     } else {
-        [self makeMoveToPosition:2];
+        [self setUIPosition:2 forPlayer:COMPUTER];
     }
 }
 

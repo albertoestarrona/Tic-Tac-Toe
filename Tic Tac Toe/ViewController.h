@@ -13,6 +13,9 @@ extern int const NO_WINNER;
 extern int const WINNER_X;
 extern int const WINNER_O;
 
+extern int const PLAYER;
+extern int const COMPUTER;
+
 @property (weak, nonatomic) IBOutlet UIButton *buttonPos1;
 @property (weak, nonatomic) IBOutlet UIButton *buttonPos2;
 @property (weak, nonatomic) IBOutlet UIButton *buttonPos3;
