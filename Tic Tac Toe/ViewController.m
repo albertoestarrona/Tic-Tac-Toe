@@ -361,13 +361,21 @@ int const COMPUTER = 1;
             break;
         case 6:
             if ([positions[2] intValue] == 0) blankCorener = 2;
-            else if ([positions[2] intValue] == 0) blankCorener = 2;
+            else if ([positions[0] intValue] == 0) blankCorener = 0;
             else if ([positions[8] intValue] == 0) blankCorener = 8;
             break;
         case 8:
             if ([positions[2] intValue] == 0) blankCorener = 2;
             else if ([positions[6] intValue] == 0) blankCorener = 6;
             else if ([positions[0] intValue] == 0) blankCorener = 0;
+            break;
+        case 5:
+            if ([positions[2] intValue] == 0) blankCorener = 2;
+            else if ([positions[8] intValue] == 0) blankCorener = 8;
+            break;
+        case 7:
+            if ([positions[8] intValue] == 0) blankCorener = 8;
+            else if ([positions[6] intValue] == 0) blankCorener = 6;
             break;
         default:
             break;
@@ -446,6 +454,14 @@ int const COMPUTER = 1;
             if (blankCorner != -1 && turn != 3) blankSpot = blankCorner;
             else if ([positions[3] intValue] == 0) blankSpot = 3;
             else if ([positions[7] intValue] == 0) blankSpot = 7;
+            break;
+        case 5:
+            blankCorner = [self nextBlankCornerFor:5];
+            if (blankCorner != -1) blankSpot = blankCorner;
+            break;
+        case 7:
+            blankCorner = [self nextBlankCornerFor:7];
+            if (blankCorner != -1) blankSpot = blankCorner;
             break;
         default:
             break;

@@ -43,5 +43,9 @@ extern int const COMPUTER;
 -(int)nextBlankCornerFor:(int) position;
 -(int)chekWinningPositionWith:(int) position;
 -(int)getPosition:(id)button;
+-(void)makeInitalMove;
+-(IBAction)initGame:(id)sender;
+-(IBAction)didSelectPosition:(id)sender;
+-(void)setUIPosition:(int) position forPlayer:(int) player;
 
 @end
